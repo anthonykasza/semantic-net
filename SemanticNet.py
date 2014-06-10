@@ -49,6 +49,15 @@ class Graph:
         self.g.add_node(id, data)
         return id
 
+    def remove_node(self, id):
+        search = [n for n in self.nodes if n.id == id]
+        if len(search) == 0:  
+            raise GraphException("Node id '" + str(id) + "' doesn't exist.")
+        elif len(search) == 1:
+            self.nodes.remove(search[0])
+        else:
+            raise GraphException("Node id '" + str(id) + "' isn't unique.")
+
     def add_edge(self, src, dst, data={}):
         if self.g.has_node(src) and self.g.has_node(dst):
             id = self.create_edge_uid()
